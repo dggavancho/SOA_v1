@@ -56,10 +56,27 @@ def sdp_solicitud_lista():
         return jsonify(response.json())
     except:
         return {'error':response_s_auth.json()['error']}
-    
-    
+#------------------------------------------------------------------------------------
 
-
+#Recojo de informacion de una solicitud
+#------------------------------------------------------------------------------------
+@app.route('/api/solicitud_detalle/<int:id>', methods=['POST'])
+def sdp_solicitud_detalle(id):
+    authtoken = request.form.get('authtoken')
+    if not authtoken:
+        return jsonify({'error': 'Missing fields'}), 400
+    response_s_auth = requests.post("http://localhost:5001/api/verificacion",data={'authtoken':authtoken},verify=False)
+    
+    try:
+        response = requests.get("https://localhost:8080/api/v3/requests/"+str(id),headers={"authtoken":KEY},verify=False)
+        print(type(response.json()['request']['requester']['id']))
+        print(type(response_s_auth.json()['userid']))
+        if(response.json()['request']['requester']['id']==str(response_s_auth.json()['userid'])):
+            return jsonify(response.json())
+        else:
+            return {'error':"Sin permisos para realizar operacion"}
+    except:
+        return {'error':response_s_auth.json()['error']}
 #------------------------------------------------------------------------------------
 
 
