@@ -1,0 +1,8 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}Proyecto SOA
+${licensePrefix}Autor: Diego Gavancho
+<#if licenseLast??>
+${licenseLast}
+</#if>

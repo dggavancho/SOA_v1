@@ -32,7 +32,7 @@ def sdp_usuarios():
     
 #------------------------------------------------------------------------------------
 
-#Recojo de informacion de usuario
+#Recoje lista de solicitudes
 #------------------------------------------------------------------------------------
 @app.route('/api/solicitud_lista', methods=['POST'])
 def sdp_solicitud_lista():
@@ -45,6 +45,7 @@ def sdp_solicitud_lista():
         input_datax = {
             'list_info':{
                 'sort_field':"id",
+                "row_count": 20,
                 'sort_order':"asc",
                 'get_total_count':True,
                 'search_fields':{
@@ -75,6 +76,34 @@ def sdp_solicitud_detalle(id):
             return jsonify(response.json())
         else:
             return {'error':"Sin permisos para realizar operacion"}
+    except:
+        return {'error':response_s_auth.json()['error']}
+#------------------------------------------------------------------------------------
+
+#Crea solicitud
+#------------------------------------------------------------------------------------
+@app.route('/api/solicitud_crea', methods=['POST'])
+def sdp_solicitud_crea():
+    authtoken = request.form.get('authtoken')
+    if not authtoken:
+        return jsonify({'error': 'Missing fields'}), 400
+    response_s_auth = requests.post("http://localhost:5001/api/verificacion",data={'authtoken':authtoken},verify=False)
+    
+    try:
+        input_data ={
+            "request":{
+                "subject": request.form.get('asunto'),
+                "description": request.form.get('descripcion'),
+                "requester":{
+                    "id": str(response_s_auth.json()['userid']),
+                },
+                "status": {
+                    "name": "Open"
+                }
+            }
+        }
+        response = requests.post("https://localhost:8080/api/v3/requests",headers={"authtoken":KEY},data={'input_data': json.dumps(input_data)},verify=False)
+        return jsonify(response.json())
     except:
         return {'error':response_s_auth.json()['error']}
 #------------------------------------------------------------------------------------

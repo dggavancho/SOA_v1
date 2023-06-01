@@ -21,6 +21,7 @@ and open the template in the editor.
         <title></title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        <script src="../recursos/ckeditor/ckeditor.js"></script>
     </head>
     <body>
         <div class="container">
@@ -62,7 +63,9 @@ and open the template in the editor.
                                 <th>Asunto</th>
                                 <th>Estado</th>
                                 <th>Técnico</th>
-                                <th></th>
+                                <td>
+                                    <?php include './solicitud_crea.php'; ?>
+                                </td>
                             </tr>
                         </thead>
 
@@ -79,9 +82,7 @@ and open the template in the editor.
                             <td><?=$solicitud->getAsunto()?></td>
                             <td><?=$solicitud->getEstado()?></td>
                             <td><?=$solicitud->getTecnico()?></td>
-                            <td>
-                                <?php include './solicitud_detalle_modal.php'; ?>
-                            </td>
+                            <td><a class="btn btn-primary" href="solicitud_detalle.php?id=<?=$solicitud->getId()?>" target="_blank">Detalles</a></td>
                         </tr>
                         <?php
                     }

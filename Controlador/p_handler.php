@@ -1,5 +1,11 @@
 <?php
 
+//------------------------------------------------
+include '../Modelo/solicitud.php';
+include '../DAO/solicitudDAO.php';
+$solicituddao = new solicitudDAO();
+//------------------------------------------------
+
 $action = $_REQUEST['action'];
 
 //--------------------------------------------------------
@@ -23,6 +29,18 @@ if($action=="login"){
     echo $res['authtoken'];
     session_start();
     $_SESSION['authtoken']=$res['authtoken'];
+    header('location:../Vista/solicitud_lista.php');
+}
+//--------------------------------------------------------
+
+
+//--------------------------------------------------------
+if($action=="create"){
+    session_start();
+    $sol = new solicitud();
+    $sol->setAsunto($_POST['asunto']);
+    $sol->setDescripcion($_POST['descripcion']);
+    $solicituddao->crear($sol,$_SESSION['authtoken']);
     header('location:../Vista/solicitud_lista.php');
 }
 //--------------------------------------------------------
