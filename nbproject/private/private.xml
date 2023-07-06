@@ -3,10 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/SOA_v1/DAO/solicitudDAO.php</file>
-            <file>file:/C:/xampp/htdocs/SOA_v1/Vista/solicitud_detalle_modal.php</file>
-            <file>file:/C:/xampp/htdocs/SOA_v1/Modelo/solicitud.php</file>
+            <file>file:/C:/xampp/htdocs/SOA_v1/Controlador/p_handler.php</file>
+            <file>file:/C:/xampp/htdocs/SOA_v1/Vista/index_Colaborador.html</file>
             <file>file:/C:/xampp/htdocs/SOA_v1/Vista/solicitud_lista.php</file>
+            <file>file:/C:/xampp/htdocs/SOA_v1/Vista/login_Colaborador.html</file>
+            <file>file:/C:/xampp/htdocs/SOA_v1/Vista/login.php</file>
+            <file>file:/C:/xampp/htdocs/SOA_v1/Vista/index_Colaborador.php</file>
         </group>
     </open-files>
 </project-private>
