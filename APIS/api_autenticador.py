@@ -93,8 +93,6 @@ def verificacion():
 @app.route('/api/login', methods=['POST'])
 def login():
     employeeid = request.form.get('employeeid')
-    
-    employeeid = "77205384"
     db="soa_s_autenticacion"
     connection = mysql.connector.connect(
         host='localhost',
