@@ -6,6 +6,20 @@ include '../Modelo/solicitud.php';
 include '../DAO/solicitudDAO.php';
 $solicituddao = new solicitudDAO();
 //------------------------------------------------
+
+//------------------------------------------------
+include '../Modelo/comentario.php';
+include '../DAO/comentarioDAO.php';
+$comentarioDAO = new comentarioDAO();
+//------------------------------------------------
+
+//------------------------------------------------
+include '../Modelo/comentario_origen.php';
+include '../DAO/comentario_origenDAO.php';
+$comentario_origendao = new comentario_origenDAO();
+//------------------------------------------------
+
+
 $sol = new solicitud();
 $sol->setId($_REQUEST['id']);
 $s = $solicituddao->seleccionar_id($sol);
@@ -21,6 +35,7 @@ Autor: Diego Gavancho
         <title></title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        <script src="../recursos/ckeditor/ckeditor.js"></script>
     </head>
     <body>
         
@@ -123,7 +138,28 @@ Autor: Diego Gavancho
                     
                 </div>
             </div>
-            
+            <div class="row">
+                <div class="col-10">
+                   <?php
+                    $idorigen = $s->getId();
+                    $idcomentario_origen = 1;
+                    $destino_de_regreso = "../solicitud_detalle.php?id=".$s->getId();
+                    ?>
+                    <?php 
+                    /*
+                    Variables que necesita el modal comentario:
+                    $idcomentario_origen: La entidad a la cual pertenece el comentario (Ver tabla Comentario Origen)
+                    $idorigen: El id del objeto al cual se la va a agregar el comentario
+                    $destino_de_regreso: La pagina a la cual se va a regresar despues de ingresado el comentario
+                    */
+                    include './modals/comentario_modal.php'; 
+                    //Borrar los valores cargados para no interferir con otras utilización del modal
+                    $idorigen = null;
+                    $idcomentario_origen = null;
+                    $destino_de_regreso = null;
+                    ?>
+                </div>
+            </div>
             
                 
             
